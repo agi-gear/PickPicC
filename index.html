@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PickPicC</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>PickPicC</h1>
+    <p class="subtitle">画像をアップロードしてクリックするとカラー値が取得できます</p>
+  </header>
+
+  <main>
+    <!-- 左ペイン：画像エリア -->
+    <section class="canvas-pane">
+      <div id="drop-zone" class="drop-zone">
+        <div class="drop-hint">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <p>画像をドロップ、またはクリックして選択</p>
+          <p class="hint-small">PNG / JPG / WebP / GIF など</p>
+        </div>
+        <canvas id="image-canvas"></canvas>
+        <canvas id="marker-canvas"></canvas>
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </div>
+    </section>
+
+    <!-- 右ペイン：結果パネル -->
+    <aside class="result-pane">
+      <div class="panel-header">
+        <label for="format-select">表示形式</label>
+        <select id="format-select">
+          <option value="rgb255">RGB (0–255)</option>
+          <option value="hsv360_100">HSV (H:0–360, S/V:0–100)</option>
+          <option value="hsv180_255">HSV (H:0–180, S/V:0–255)</option>
+          <option value="hsv360_255">HSV (H:0–360, S/V:0–255)</option>
+        </select>
+        <button id="reset-btn" title="履歴とマーカーをクリア">リセット</button>
+      </div>
+
+      <ul id="history-list" class="history-list">
+        <li class="empty-state">画像をクリックすると<br>ここに結果が表示されます</li>
+      </ul>
+    </aside>
+  </main>
+
+  <!-- トースト通知 -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
